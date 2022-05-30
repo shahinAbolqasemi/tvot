@@ -36,6 +36,7 @@ def vote():
         try:
             response = requests.post('https://turkishtvlife.com/wp-admin/admin-ajax.php', params=params, cookies=cookies,
                                      headers=headers, data=data)
+            response.raise_for_status()
             if response.status_code == 200:
                 result = re.findall(
                     r'>.+ Votes  .*%',
