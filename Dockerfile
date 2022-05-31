@@ -5,6 +5,7 @@ WORKDIR /runner
 RUN pip install -U pip 
 
 RUN pip install requests
+RUN pip install -U requests[socks]
 
 COPY . .
 
