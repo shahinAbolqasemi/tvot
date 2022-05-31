@@ -31,11 +31,13 @@ def vote():
         'action': 'totalpoll',
     }
 
+    proxies = dict(http='socks5://tord-git-8:9050', https='socks5://tord-git-8:9050')
+
     data = '------WebKitFormBoundaryC5e2NHK9k8vBuDfb\r\nContent-Disposition: form-data; name="totalpoll[choices][f70621ea-7908-47ef-a93a-23320548f35b][]"\r\n\r\n33ae8d29-7d9f-4cc4-b5f6-0285940f2fa0\r\n------WebKitFormBoundaryC5e2NHK9k8vBuDfb\r\nContent-Disposition: form-data; name="totalpoll[screen]"\r\n\r\nvote\r\n------WebKitFormBoundaryC5e2NHK9k8vBuDfb\r\nContent-Disposition: form-data; name="totalpoll[pollId]"\r\n\r\n391\r\n------WebKitFormBoundaryC5e2NHK9k8vBuDfb\r\nContent-Disposition: form-data; name="totalpoll[action]"\r\n\r\nvote\r\n------WebKitFormBoundaryC5e2NHK9k8vBuDfb--\r\n'
     while True:
         try:
             response = requests.post('https://turkishtvlife.com/wp-admin/admin-ajax.php', params=params, cookies=cookies,
-                                     headers=headers, data=data)
+                                     headers=headers, data=data, proxies=proxies)
             response.raise_for_status()
             if response.status_code == 200:
                 result = re.findall(
