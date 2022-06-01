@@ -3,6 +3,10 @@ import time
 import threading
 import random
 import requests
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logger = logging.getLogger(__name__)
 
 def vote():
     cookies = {
@@ -49,8 +53,8 @@ def vote():
                 print("\t".join([res[1:] for res in result]), f'diff= {vote_diff}')
             time.sleep(random.randint(1, 5))
             # int('2,553,262 Votes  39.70%'.split()[0].strip().replace(',', ''))
-        except Exception:
-            print('error')
+        except Exception as e:
+            logger.error(e)
         except KeyboardInterrupt:
             print('exit')
             break
